@@ -8,20 +8,14 @@ class OrderRepo
 
     public function saveOrder(Order $order)
     {
-        $this->_instanceStorage[] = $order;
+        $this->_instanceStorage[$this->_orderId] = $order;
 
         return $this->_orderId++;
     }
 
     public function getOrder(int $id)
     {
-        foreach ($this->_instanceStorage as $order) {
-            if ($order->getId() === $id) {
-                return $order;
-            }
-        }
-
-        return null;
+        return $this->_instanceStorage[$id] ?? null;
     }
 
     public function getCustomerOrders(int $custId)
